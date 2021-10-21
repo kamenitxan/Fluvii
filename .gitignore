@@ -1,3 +1,4 @@
 /.bsp/
 /node_modules/
 /modules/backend/src/main/resources/dev.js
+/modules/backend/fluvii.sqlite

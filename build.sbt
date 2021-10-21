@@ -1,7 +1,7 @@
 import sbt.Keys.organization
 
 val V = new {
-	val Scala = "3.0.2"
+	val Scala = "3.1.0"
 
 	val laminar         = "0.13.1"
 	val http4s          = "0.23.4"
@@ -9,10 +9,11 @@ val V = new {
 	val circe           = "0.14.1"
 	val decline         = "2.1.0"
 	val weaver          = "0.7.6"
+	val doobieVersion   = "1.0.0-RC1"
 }
 
 scalaVersion := V.Scala
-
+name := "fluvii"
 version := "0.1-SNAPSHOT"
 
 val Dependencies = new {
@@ -33,7 +34,12 @@ val Dependencies = new {
 	lazy val backend = Seq(
 		libraryDependencies ++=
 			http4sModules.map("org.http4s" %% _         % V.http4s) ++
-				Seq("com.monovore"           %% "decline" % V.decline)
+				Seq(
+					"com.monovore"             %% "decline" % V.decline,
+					"org.xerial" 							 % "sqlite-jdbc" % "3.23.1",
+					"org.tpolecat" %% "doobie-core"      % V.doobieVersion,
+					"org.tpolecat" %% "doobie-hikari"    % V.doobieVersion
+				)
 	)
 
 	lazy val shared = Def.settings(
@@ -60,7 +66,7 @@ lazy val frontend = (project in file("modules/frontend"))
 	)
 	.settings(
 		commonBuildSettings,
-		name := "fluvii-fe",
+		name := "fluvii-fe"
 	)
 
 lazy val backend = (project in file("modules/backend"))
@@ -92,12 +98,12 @@ lazy val shared = crossProject(JSPlatform, JVMPlatform)
 	.jsSettings(commonBuildSettings)
 	.jvmSettings(commonBuildSettings)
 	.settings(
-		name := "fluvii-shared",
+		name := "fluvii-shared"
 	)
 
 ThisBuild / scalafixDependencies += "com.github.liancheng" %% "organize-imports" % "0.5.0"
 ThisBuild / semanticdbEnabled := true
-ThisBuild / scalacOptions += "-Wunused"
+ThisBuild / scalacOptions += "-deprecation"
 
 lazy val fastOptCompileCopy = taskKey[Unit]("")
 
