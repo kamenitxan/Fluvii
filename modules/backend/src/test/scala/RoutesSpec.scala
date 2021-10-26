@@ -1,10 +1,8 @@
 package example.backend
 
 import scala.io.Source
-
 import cats.effect.IO
 import cats.effect.Resource
-
 import org.http4s.Method
 import org.http4s.Request
 import org.http4s.Response
@@ -12,8 +10,8 @@ import org.http4s.Uri
 import org.http4s.circe.CirceEntityEncoder.*
 import org.http4s.dsl.*
 import org.http4s.implicits.*
-
 import _root_.io.circe.syntax.*
+import cz.kamenitxan.{Routes, Service, ServiceImpl}
 import example.shared.Protocol
 
 object RoutesSpec extends weaver.IOSuite with Http4sDsl[IO]:

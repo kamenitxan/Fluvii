@@ -1,4 +1,4 @@
-package example.backend
+package cz.kamenitxan
 
 import cats.data.Validated
 import cats.implicits.*
