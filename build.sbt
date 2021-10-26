@@ -38,7 +38,8 @@ val Dependencies = new {
 					"com.monovore"             %% "decline" % V.decline,
 					"org.xerial" 							 % "sqlite-jdbc" % "3.23.1",
 					"org.tpolecat" %% "doobie-core"      % V.doobieVersion,
-					"org.tpolecat" %% "doobie-hikari"    % V.doobieVersion
+					"org.tpolecat" %% "doobie-hikari"    % V.doobieVersion,
+					"is.cir" %% "ciris" % "2.2.0"
 				)
 	)
 
