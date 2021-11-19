@@ -2,3 +2,13 @@
 /node_modules/
 /modules/backend/src/main/resources/dev.js
 /modules/backend/fluvii.sqlite
+/modules/backend/target/
+/.idea/
+/modules/shared/target/
+/modules/frontend/target/
+/target/
+/modules/shared/.js/target/
+/modules/shared/.jvm/target/
+/project/target/
+/project/project/target/
+*.semanticdb

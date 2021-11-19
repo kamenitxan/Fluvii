@@ -1,5 +1,3 @@
-package example.backend
-
 import scala.io.Source
 import cats.effect.IO
 import cats.effect.Resource
@@ -60,10 +58,14 @@ object RoutesSpec extends weaver.IOSuite with Http4sDsl[IO]:
       Seq("a", "b", "c", "d")
     )
 
-    val serviceImpl = new Service:
+    val serviceImpl = new Service {
       override def getSuggestions(
-          request: GS.Request
-      ): IO[GS.Response] = IO(stubResponse)
+                                   request: GS.Request
+                                 ): IO[GS.Response] = IO(stubResponse)
+
+      override def test(): IO[String] = ???
+    }
+
 
     val request = GS.Request("hello!")
 

@@ -153,13 +153,10 @@ val CICommands = Seq(
 	"frontend/compile",
 	"frontend/fastOptJS",
 	"frontend/test",
-	"scalafmtCheckAll",
 	s"scalafix --check $scalafixRules"
 ).mkString(";")
 
 val PrepareCICommands = Seq(
-	"scalafmtAll",
-	"scalafmtSbt",
 	s"scalafix $scalafixRules"
 ).mkString(";")
 
