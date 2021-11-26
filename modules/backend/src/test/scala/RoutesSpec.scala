@@ -9,7 +9,7 @@ import org.http4s.circe.CirceEntityEncoder.*
 import org.http4s.dsl.*
 import org.http4s.implicits.*
 import _root_.io.circe.syntax.*
-import cz.kamenitxan.{Routes, Service, ServiceImpl}
+import cz.kamenitxan.fluvii.{Routes, Service, ServiceImpl}
 import example.shared.Protocol
 
 object RoutesSpec extends weaver.IOSuite with Http4sDsl[IO]:

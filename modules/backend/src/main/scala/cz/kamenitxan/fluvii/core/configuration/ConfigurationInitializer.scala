@@ -1,5 +1,6 @@
 package cz.kamenitxan.fluvii.core.configuration
 
+import cz.kamenitxan.fluvii.logging.LogRepository
 import cz.kamenitxan.fluvii.utils.Utils
 import org.slf4j.LoggerFactory
 
@@ -43,15 +44,16 @@ object ConfigurationInitializer {
 		}
 	}
 
-	transparent inline def ic[T](name: String, required: Boolean = false, default: T = null) = {
+	transparent inline def ic[T](name: String, required: Boolean = true, default: T = null) = {
 		println(s"Initializing $name")
 		//conf(name.value)
+		val value = conf.getOrElse(name, default)
 		inline erasedValue[T] match
-			case _: java.lang.Integer     => conf(name).toInt
+			case _: java.lang.Integer => conf.get(name).map(_.toInt).getOrElse(default.asInstanceOf[Int])
 			case _: java.lang.Boolean => conf(name).toBoolean
-			case _: String    => conf(name)
-			case _: DeployMode => DeployMode.valueOf(conf(name))
-			case _          => throw new IllegalArgumentException
+			case _: String => value.toString
+			case _: DeployMode => DeployMode.valueOf(value.asInstanceOf[String])
+			case _ => throw new IllegalArgumentException
 	}
 
 }

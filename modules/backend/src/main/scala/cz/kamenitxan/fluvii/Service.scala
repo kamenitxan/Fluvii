@@ -1,4 +1,4 @@
-package cz.kamenitxan
+package cz.kamenitxan.fluvii
 
 import cats.effect.IO
 import doobie.util.transactor.Transactor

@@ -1,4 +1,4 @@
-package cz.kamenitxan
+package cz.kamenitxan.fluvii
 
 import scala.concurrent.duration.*
 
