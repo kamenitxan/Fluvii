@@ -3,13 +3,14 @@ import sbt.Keys.organization
 val V = new {
 	val Scala = "3.1.0"
 
-	val laminar         = "0.13.1"
-	val http4s          = "0.23.4"
-	val sttp            = "3.3.13"
-	val circe           = "0.14.1"
-	val decline         = "2.1.0"
-	val weaver          = "0.7.6"
-	val doobieVersion   = "1.0.0-RC1"
+	val laminar = "0.13.1"
+	val http4s = "0.23.4"
+	val sttp = "3.3.13"
+	val circe = "0.14.1"
+	val decline = "2.1.0"
+	val weaver = "0.7.6"
+	val doobieVersion = "1.0.0-RC1"
+	val log4jVersion = "2.14.1"
 }
 
 scalaVersion := V.Scala
@@ -25,21 +26,22 @@ val Dependencies = new {
 	lazy val frontend = Seq(
 		libraryDependencies ++=
 			Seq(
-				"com.softwaremill.sttp.client3" %%% "core"    % V.sttp,
-				"com.softwaremill.sttp.client3" %%% "circe"   % V.sttp,
-				"com.raquo"                     %%% "laminar" % V.laminar
+				"com.softwaremill.sttp.client3" %%% "core" % V.sttp,
+				"com.softwaremill.sttp.client3" %%% "circe" % V.sttp,
+				"com.raquo" %%% "laminar" % V.laminar
 			)
 	)
 
 	lazy val backend = Seq(
 		libraryDependencies ++=
-			http4sModules.map("org.http4s" %% _         % V.http4s) ++
+			http4sModules.map("org.http4s" %% _ % V.http4s) ++
 				Seq(
-					"com.monovore"             %% "decline" % V.decline,
-					"org.xerial" 							 % "sqlite-jdbc" % "3.23.1",
-					"org.tpolecat" %% "doobie-core"      % V.doobieVersion,
-					"org.tpolecat" %% "doobie-hikari"    % V.doobieVersion,
-					"is.cir" %% "ciris" % "2.2.0"
+					"com.monovore" %% "decline" % V.decline,
+					"org.xerial" % "sqlite-jdbc" % "3.23.1",
+					"org.tpolecat" %% "doobie-core" % V.doobieVersion,
+					"org.tpolecat" %% "doobie-hikari" % V.doobieVersion,
+					"org.apache.logging.log4j" % "log4j-slf4j-impl" % V.log4jVersion,
+					"com.lihaoyi" %% "sourcecode" % "0.2.7"
 				)
 	)
 
