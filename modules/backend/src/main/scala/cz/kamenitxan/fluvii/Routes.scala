@@ -31,14 +31,7 @@ class Routes(
 				// loader gif
 				resp <- Ok(result) <* IO.sleep(50.millis)
 			yield resp
-
-		case request@GET -> Root / "test" =>
-			for
-				result <- service.test()
-
-				resp <- Ok(result)
-			yield resp
-
+			
 		case request@GET -> Root / "frontend" / "app.js" =>
 			StaticFile
 				.fromResource[IO](frontendJS, Some(request))

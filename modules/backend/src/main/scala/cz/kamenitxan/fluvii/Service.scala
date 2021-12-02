@@ -8,6 +8,7 @@ import doobie.implicits.*
 import cats.*
 import cats.effect.*
 import cats.implicits.*
+import cz.kamenitxan.fluvii.logging.Logger
 import example.shared.Protocol.GetSuggestions.{Request, Response}
 
 trait Service {
@@ -45,6 +46,9 @@ object ServiceImpl extends Service {
 	}
 
 	def test() = {
+		Logger.critical("test error")
+		throw new UnsupportedOperationException("gagagagaga")
+
 		import cats.effect.unsafe.implicits.global
 
 		val xa = Transactor.fromDriverManager[IO](

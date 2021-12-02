@@ -1,5 +1,7 @@
 package cz.kamenitxan.fluvii.utils
 
+import cz.kamenitxan.fluvii.logging.Logger
+
 import java.io.{BufferedReader, InputStream, InputStreamReader}
 import java.lang.reflect.{Field, ParameterizedType, Type}
 import java.net.URLEncoder
@@ -115,8 +117,16 @@ object Utils {
 		val result = measuredFun
 		val stopTime = System.currentTimeMillis()
 		val elapsedTime = stopTime - startTime
-		// TODO
-		//Logger.info(logFun.apply(elapsedTime))
+		Logger.info(logFun.apply(elapsedTime))
+		result
+	}
+
+	def measuredF[B](logFun: Long => Unit)(measuredFun: => B): B = {
+		val startTime = System.currentTimeMillis()
+		val result = measuredFun
+		val stopTime = System.currentTimeMillis()
+		val elapsedTime = stopTime - startTime
+		logFun.apply(elapsedTime)
 		result
 	}
 

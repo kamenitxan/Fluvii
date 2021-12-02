@@ -46,7 +46,8 @@ val Dependencies = new {
 	)
 
 	lazy val shared = Def.settings(
-		libraryDependencies += "io.circe" %%% "circe-core" % V.circe
+		libraryDependencies += "io.circe" %%% "circe-core" % V.circe,
+		libraryDependencies += "io.circe" %%% "circe-generic" % V.circe
 	)
 
 	lazy val tests = Def.settings(
@@ -105,7 +106,7 @@ lazy val shared = crossProject(JSPlatform, JVMPlatform)
 	)
 
 ThisBuild / scalafixDependencies += "com.github.liancheng" %% "organize-imports" % "0.5.0"
-ThisBuild / semanticdbEnabled := true
+ThisBuild / semanticdbEnabled := false
 ThisBuild / scalacOptions += "-deprecation"
 
 lazy val fastOptCompileCopy = taskKey[Unit]("")

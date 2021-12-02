@@ -1,9 +1,11 @@
 package cz.kamenitxan.fluvii
 
 import cats.effect.*
+import cats.syntax.all.*
 import com.comcast.ip4s.{Host, Port}
 import cz.kamenitxan.fluvii.core.configuration.{Config, ConfigurationInitializer, DeployMode}
 import cz.kamenitxan.fluvii.logging.Logger
+import cz.kamenitxan.fluvii.utils.LoggingMiddleware
 import org.http4s.ember.server.EmberServerBuilder
 import org.http4s.implicits.*
 import org.http4s.server.middleware.GZip
@@ -26,7 +28,6 @@ object FluviiServer extends IOApp {
 
 
 		val status = IO.delay({
-			println("started")
 			Logger.info(s"Running server on http://0.0.0.0:${Config.port} (mode: ${Config.deployMode})")
 		})
 
@@ -35,11 +36,11 @@ object FluviiServer extends IOApp {
 			case _: DeployMode.TESTING.type => "dev.js"
 			case _: DeployMode.PRODUCTION.type => "prod.js"
 		}
-		val routes = new Routes(ServiceImpl, frontendJS).routes
+		val routes = new Routes(ServiceImpl, frontendJS).routes <+> TestService.routes
 
-		val app = GZip(routes)
+		val app = GZip(LoggingMiddleware(routes))
 
-		Logger.critical("test")
+		Logger.info("Starting Fluvii")
 
 		EmberServerBuilder
 			.default[IO]
